@@ -6,7 +6,7 @@ const Promo = () => {
   return (
     <div className="container" data-aos="fade">
       <div
-        className="row mx-1 pt-5 px-md-5 rounded-4 gap-md-0 gap-4"
+        className="row mx-1 pt-5 px-md-5 rounded-4"
         style={{
           background: "linear-gradient(to right, #1c1c1c, #2a2a2a)",
         }}
