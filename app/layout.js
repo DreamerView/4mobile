@@ -4,6 +4,9 @@ import "@/app/globals.css";
 import AOSInit from "@/component/AOSInit";
 import Header from "@/component/Header";
 import Footer from "@/component/Footer";
+import Modal from "@/component/Modal";
+import Nav from "@/component/Nav";
+import Script from 'next/script';
 
 export const metadata = {
   title: "Create Next App",
@@ -15,9 +18,14 @@ export default function RootLayout({ children }) {
     <html lang="ru" data-bs-theme="dark">
       <body className="bg-black">
         <AOSInit />
+        <Modal/>
         <Header />
+        <Nav/>
         {children}
         <Footer/>
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        />
       </body>
     </html>
   );

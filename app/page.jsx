@@ -6,7 +6,6 @@ import Map  from "@/component/Map"
 const Home = () => {
     return(
         <div className="d-flex flex-column gap-5">
-            <Promo />
             <CardList />
             <CardList />
             <SocialNetwork />
