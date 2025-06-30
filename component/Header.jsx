@@ -4,7 +4,7 @@ import LogoImg from "@/public/logo.png";
 const Header = () => {
     return(
         <header className="container" data-aos="fade-in">
-            <div className="row py-5 align-items-center">
+            <div className="row py-md-5 py-4 align-items-center">
                 <div className="col-6" data-aos="fade-in" data-aos-delay="400">
                     <Image src={LogoImg} width={120} height={43} alt="" />
                 </div>

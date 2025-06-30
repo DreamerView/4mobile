@@ -1,6 +1,7 @@
 import CardList from "@/component/CardList";
 import SocialNetwork from "@/component/SocialNetwork";
 import Promo from "@/component/Promo";
+import Map  from "@/component/Map"
 
 const Home = () => {
     return(
@@ -9,6 +10,7 @@ const Home = () => {
             <CardList />
             <CardList />
             <SocialNetwork />
+            <Map />
         </div>
     )
 }
