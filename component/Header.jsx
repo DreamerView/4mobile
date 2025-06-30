@@ -20,7 +20,7 @@ const Header = () => {
                             <a className="btn btn-outline-light border-0 rounded-5 fw-bold fs-5" href="#">Телефон</a>
                         </li>
                         <li>
-                            <a className="btn border-0 rounded-5 fw-bold fs-5 d-flex gap-2 px-4" style={{backgroundColor:"#25d366",color:"#000000"}} href="#"><i className="bi bi-whatsapp"></i>Написать</a>
+                            <a className="btn border-0 rounded-5 fw-bold fs-5 d-flex gap-2 px-4" style={{backgroundColor:"#25d366",color:"#000000"}} href="https://wa.me/+77716993434" tatget="_blank"><i className="bi bi-whatsapp"></i>Написать</a>
                         </li>
                     </ul>
                 </div>
