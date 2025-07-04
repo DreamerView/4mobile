@@ -23,9 +23,18 @@ const Page = async ({ params }) => {
         }
     });
     const list = await reqList.json();
+
+    const reqVar = await fetch(`https://api.4mobile.kz/api/content/items/variants?filter[product]=${id}&&populate=1`, {
+        method: 'GET',
+        headers: {
+            "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
+        }
+    });
+    const resVar = await reqVar.json();
+    console.log(resVar);
     return (
         <div className="d-flex flex-column gap-5">
-            <ProductPage product={res} />
+            <ProductPage product={res} variants={resVar} />
             <div className="container-xl">
                 <div className="row gap-lg-0 gap-5">
                     <div className="col-lg-6 px-md-5 d-flex flex-column justify-content-center">
