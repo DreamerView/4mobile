@@ -5,12 +5,23 @@ import "aos/dist/aos.css";
 
 export default function AOSInit() {
   useEffect(() => {
-    AOS.init({
-      duration: 600,
-      once: true,
-      offset: 100,
-    });
+    const handleInit = () => {
+      AOS.init({
+        duration: 600,
+        once: true,
+        offset: 100,
+      });
+    };
+
+    if (typeof window !== "undefined" && document.readyState === "complete") {
+      // если уже загружено
+      handleInit();
+    } else {
+      // если ещё нет — ждём полной загрузки
+      window.addEventListener("load", handleInit);
+      return () => window.removeEventListener("load", handleInit);
+    }
   }, []);
 
-  return null; // не рендерит ничего
+  return null;
 }

@@ -19,7 +19,7 @@ const ProductPage = ({ product }) => {
     ));
 
   return (
-    <div className="container-xl py-5">
+    <div className="container-xl py-lg-5">
       <div className="row">
         <div className="col-lg-5 col-md-6 px-lg-5" data-aos="fade-left">
           <div
@@ -37,7 +37,7 @@ const ProductPage = ({ product }) => {
           </div>
         </div>
 
-        <div className="col-lg-7 col-md-6 px-lg-5 d-flex flex-column justify-content-center gap-4" data-aos="fade-right" data-aos-delay="200">
+        <div className="col-lg-7 my-5 mt-md-0 col-md-6 px-lg-5 d-flex flex-column justify-content-center gap-4" data-aos="fade-right" data-aos-delay="200">
           <h1 className="m-0">{product.title}</h1>
 
           <div className="bg-dark p-4 rounded-4 text-light">
