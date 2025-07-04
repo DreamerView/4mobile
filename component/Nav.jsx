@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const Nav = ({linkJson}) => {
     const path = usePathname();
-    console.log(path);
+    if(path!=="/") return null;
     return(
         <div className="container-xl pb-5" data-aos="fade-up">
             <div className="d-flex gap-3 justify-content-lg-center overflow-x-auto">
