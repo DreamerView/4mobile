@@ -1,60 +1,52 @@
 .scrollContainer {
+  display: flex; /* 🔥 критично */
+  flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
   overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE и Edge */
-  overflow-y: visible;
 }
 
 .scrollContainer::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
 
-.scrollContainer::-webkit-scrollbar {
-  height: 8px;
-}
-
-.scrollContainer::-webkit-scrollbar-thumb {
-  background-color: #adb5bd;
-  border-radius: 10px;
-}
-
-.cardBox {
-  flex: 0 0 auto;
-  width: 200px;
-  height: 200px;
-  scroll-snap-align: start;
-  background-color: var(--bs-secondary-bg, #e9ecef);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-
+/* Карточка как целая единица */
 .cardHover {
+  flex: 0 0 auto;
+  width: 260px; /* фиксированная ширина всей карточки */
   transition: transform 0.3s ease, background-color 0.3s ease;
   border-radius: 1rem;
   padding: 1rem;
   cursor: pointer;
-  will-change:auto;
+  will-change: auto;
+  scroll-snap-align: start;
 }
 
+.cardBox {
+  width: 100%;
+  height: 200px;
+  background-color: var(--bs-secondary-bg, #e9ecef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover-эффекты */
 .cardHover:hover > .cardBox {
-  background-color: #f8f9fa!important;
+  background-color: #f8f9fa !important;
 }
 
 .cardHover:hover {
-  background-color: #f8f9fa; /* светлый фон Bootstrap */
-  color:black;
-  transform: translateY(-6px)!important;
+  background-color: #f8f9fa;
+  color: black!important;
+  transform: translateY(-6px) !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-
-/* Позиционирование Bootstrap-кнопок */
+/* Позиционирование стрелок */
 .arrowButton {
   position: absolute;
   top: 50%;

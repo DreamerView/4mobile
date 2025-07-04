@@ -1,10 +1,14 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import styles from "./CardList.module.css";
+import Link from "next/link";
 
-const arrayRender = [1, 2, 3, 4, 5, 6, 7, 8];
 
-const CardList = () => {
+const CardList = ({title=null,list=[]}) => {
+    if(list.length===0) {
+        return null;
+    }
+
     const scrollRef = useRef(null);
     const [showLeft, setShowLeft] = useState(false);
     const [showRight, setShowRight] = useState(true);
@@ -32,8 +36,8 @@ const CardList = () => {
     };
 
     return (
-        <div className="position-relative container" data-aos="fade-up" data-aos-delay="100">
-            <h1 className="d-flex align-items-center gap-3 pb-2">Смартфоны</h1>
+        <div className="position-relative container-xl" data-aos="fade-up" data-aos-delay="100">
+            {title && (<h2 className="d-flex align-items-center gap-3 pb-2">{title}</h2>)}
             {showLeft && (
                 <button
                     className={`btn btn-light rounded-circle p-0 ${styles.arrowButton} ${styles.left}`}
@@ -88,14 +92,13 @@ const CardList = () => {
                 ref={scrollRef}
                 style={{paddingTop:"1rem",paddingBottom:"1rem"}}
             >
-                {arrayRender.map((item, index) => (
-                    <div key={index} data-aos="fade" data-aos-delay={index * 200} className={styles.cardHover}>
+                {list.map((item, index) => (
+                    <Link href={`/view/${item['_id']}`} style={{display:"block",textDecoration: "none",color: "inherit"}} key={index} data-aos="fade-right" data-aos-delay={index * 200} className={styles.cardHover}>
                         <div className={`${styles.cardBox} rounded-4`}>
-                            <img src="/iphone/15/black.png" style={{ width: "auto", height: 180 }} alt="" />
+                            <img src={`https://api.4mobile.kz/storage/uploads${item.image.path}`} loading="lazy" style={{ width: "auto", height: 180 }} alt="" />
                         </div>
-                        <h6 className="my-3 fw-bold">Смартфон Apple iPhone 15 128Gb черный</h6>
-                        <button className="btn btn-light rounded-4 d-flex gap-2" style={{fontSize:"0.8rem"}}><i className="bi bi-cart-plus-fill"></i>Заказать</button>
-                    </div>
+                        <h6 className="my-3 fw-bold text-break">{item['title']}</h6>
+                    </Link>
                 ))}
             </div>
         </div>

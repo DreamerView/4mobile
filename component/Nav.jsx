@@ -1,19 +1,14 @@
-const linkJson = [
-    {link:"",title:"IPhone"},
-    {link:"",title:"Apple Watch"},
-    {link:"",title:"iPad"},
-    {link:"",title:"Mac"},
-    {link:"",title:"Наушники"},
-    {link:"",title:"Аксессуары"},
-    {link:"",title:"Dyson"},
-    {link:"",title:"Sony Playstation "}
-]
+"use client"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const Nav = () => {
+const Nav = ({linkJson}) => {
+    const path = usePathname();
+    console.log(path);
     return(
-        <div className="container pb-5" data-aos="fade-up">
+        <div className="container-xl pb-5" data-aos="fade-up">
             <div className="d-flex gap-3 justify-content-lg-center overflow-x-auto">
-                {linkJson.map((link,index)=><a key={index} href="" data-aos="fade" data-aos-delay={index*100} className="btn bg-body-secondary rounded-4 text-nowrap">{link['title']}</a>)}
+                {linkJson.map((link,index)=><Link key={index} href={`/categories/${link['_id']}`} data-aos="fade-right" data-aos-delay={index*100} className={`btn ${path==="/categories/"+link["_id"]?"btn-light":"btn-dark"} rounded-4 text-nowrap`}>{link['name']}</Link>)}
             </div>
         </div>
     )

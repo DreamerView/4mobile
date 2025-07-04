@@ -1,18 +1,29 @@
 import Image from "next/image";
 import LogoImg from "@/public/logo.png";
+import Link from "next/link";
 
 const Header = () => {
+    
     return(
-        <header className="container" data-aos="fade-in">
+        <header className="container-xl" data-aos="fade-in">
             <div className="row py-md-5 py-5 align-items-center justify-content-center">
                 <div className="col-lg-4 d-lg-block d-none">
                     <div className="d-inline-flex flex-column align-items-start">
-                        <a className="btn btn-outline-light border-0 rounded-4 d-flex gap-3 btn-lg m-0" href=""><i className="bi bi-telephone-forward text-danger"></i>+7 (771) 699 34 34</a>
+                        <a className="btn btn-outline-light border-0 rounded-4 d-flex gap-3 btn-lg m-0" href="tel:+77716993434"><i className="bi bi-telephone-forward text-danger"></i>+7 (771) 699 34 34</a>
                         <button className="btn btn-outline-secondary border-0 rounded-4 btn-sm m-0">Обратный звонок</button>
                     </div>
                 </div>
                 <div className="col-lg-4 col-12 d-flex justify-content-center align-items-center" data-aos="fade-in" data-aos-delay="400">
-                    <Image src={LogoImg} width={275} style={{maxWidth:275,width:"calc(100% - 64px)"}} height={98} alt="" />
+                    <Link href="/" className="d-block text-center">
+                        <Image
+                            src={LogoImg}
+                            width={275}
+                            height={98}
+                            className="img-fluid"
+                            alt="Логотип"
+                            priority
+                        />
+                    </Link>
                 </div>
                 <div className="col-lg-4 d-lg-block d-none">
                     <div className="d-flex gap-2 justify-content-end">
