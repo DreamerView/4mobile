@@ -1,6 +1,7 @@
 import CardList from "@/component/CardList";
 import ProductPage from "@/component/ProductPage";
-// import CardList from "@/component/CardList";
+import VideoPlayerWrapper from "@/component/VideoPlayerWrapper";
+import ProductPageDesc from "@/component/ProductPageDesc";
 
 const Page = async ({ params }) => {
     const { id } = await params;
@@ -23,10 +24,21 @@ const Page = async ({ params }) => {
     });
     const list = await reqList.json();
     return (
-        <>
+        <div className="d-flex flex-column gap-5">
             <ProductPage product={res} />
+            <div className="container-xl">
+                <div className="row gap-lg-0 gap-5">
+                    <div className="col-lg-6 px-md-5 d-flex flex-column justify-content-center">
+                        <ProductPageDesc desc={res.description} />
+                    </div>
+                    <div className="col-lg-6 px-md-5">
+                        <VideoPlayerWrapper url="https://www.youtube.com/watch?v=08ZzCYdYCXs" />
+                    </div>
+
+                </div>
+            </div>
             <CardList list={list} title="Вам также может понравиться 💖"/>
-        </>
+        </div>
     );
 };
 
