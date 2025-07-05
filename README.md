@@ -17,6 +17,7 @@
 * **Library**: React
 * **UI Kit**: Bootstrap 5
 * **Icons**: Bootstrap Icons
+* **CI/CD**: GitHub Actions
 
 ## 📁 Project Structure
 
@@ -43,6 +44,16 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 The frontend connects to a backend available at [https://api.4mobile.kz](https://api.4mobile.kz), powered by **Cockpit CMS** — a headless content management system by [Cockpit-HQ](https://getcockpit.com/).
 
 All content and data (products, categories, etc.) are fetched via Cockpit’s RESTful API.
+
+## ⚙️ CI/CD Automation
+
+4Mobile uses **GitHub Actions** for continuous integration and deployment:
+
+* Automatic build and lint on every push
+* Deploy to production server via SSH or third-party hosting (e.g., Vercel, Netlify)
+* Environment variables and secrets managed via GitHub Settings → Secrets
+
+Workflow files are located in `.github/workflows/` directory.
 
 ## 📄 License
 
