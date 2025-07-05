@@ -1,0 +1,36 @@
+name: 🚀 Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # Измени, если у тебя другая ветка (например, master)
+
+jobs:
+  deploy:
+    name: Upload and restart
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⏬ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🔐 Setup SSH access
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: 📤 Rsync project to server
+        run: |
+          rsync -avz --delete ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.DEST_PATH }}
+
+      - name: 🚀 Install & Restart PM2
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+            cd ${{ secrets.DEST_PATH }}
+            npm install --omit=dev
+            npm run build
+            pm2 restart next-app || pm2 start "npm start" --name next-app
+            pm2 save
+          EOF
