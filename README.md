@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 4Mobile — E-commerce Web Platform
 
-## Getting Started
+**4Mobile** is a modern, responsive frontend-only e-commerce platform designed for small and medium businesses. It provides a clean and fast user interface for showcasing products and is fully integrated with a custom backend.
 
-First, run the development server:
+## 🌟 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+* 🛒 Product catalog with categories
+* 🔍 Search and filter functionality
+* 📱 Mobile-friendly responsive design
+* 📦 Product detail pages
+* 🖼 Image preview and layout
+* ⚡ Fast and lightweight UI built with Next.js
+
+## 🛠 Tech Stack
+
+* **Framework**: Next.js
+* **Library**: React
+* **UI Kit**: Bootstrap 5
+* **Icons**: Bootstrap Icons
+
+## 📁 Project Structure
+
+```
+/public         # Static assets (images, icons, etc.)
+/pages          # Next.js pages
+/components     # UI components
+/styles         # CSS modules and global styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/your-username/4mobile.git
+cd 4mobile
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## 🔌 Backend
 
-To learn more about Next.js, take a look at the following resources:
+The frontend connects to a backend available at [https://api.4mobile.kz](https://api.4mobile.kz), powered by **Cockpit CMS** — a headless content management system by [Cockpit-HQ](https://getcockpit.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All content and data (products, categories, etc.) are fetched via Cockpit’s RESTful API.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
+MIT License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Made with ❤️ in Kazakhstan by [Temirkhan](https://github.com/Temirkhan)**
