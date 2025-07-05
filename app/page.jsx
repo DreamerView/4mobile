@@ -40,7 +40,7 @@ for (const product of allProducts) {
 
     return (
         <>
-            <div className="d-flex flex-column gap-5">
+            <div className="d-flex flex-column gap-5"> 
                 {groupedArray.map((product,index)=>(<CardList key={index} title={product.title} list={product.json}/>))}
                 <SocialNetwork />
                 <Map />
