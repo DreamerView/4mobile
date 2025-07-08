@@ -95,7 +95,7 @@ const CardList = ({title=null,list=[]}) => {
                 {list.map((item, index) => (
                     <Link href={`/view/${item['_id']}`} style={{display:"block",textDecoration: "none",color: "inherit"}} key={index} data-aos="fade-right" data-aos-delay={index * 200} className={styles.cardHover}>
                         <div className={`${styles.cardBox} rounded-4`}>
-                            <img src={`https://api.4mobile.kz/storage/uploads${item.image.path}`} loading="lazy" style={{ width: "auto", height: 180 }} alt="" />
+                            {item.image?.path && <img src={`https://api.4mobile.kz/storage/uploads${item.image.path}`} loading="lazy" style={{ width: "auto", height: 180 }} alt="" />}
                         </div>
                         <h6 className="my-3 fw-bold text-break">{item['title']}</h6>
                     </Link>

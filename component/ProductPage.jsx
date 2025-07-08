@@ -9,6 +9,7 @@ const ProductPage = ({ product,variants }) => {
             className="bg-body-secondary w-100 h-auto rounded-4"
             style={{ aspectRatio: 3 / 2, position: "relative" }}
           >
+            {product.image?.path &&
             <Image
               src={`https://api.4mobile.kz/storage/uploads${product.image.path}`}
               alt={product.title}
@@ -16,7 +17,7 @@ const ProductPage = ({ product,variants }) => {
               fill
               style={{ objectFit: "contain" }}
               loading="lazy"
-            />
+            />}
           </div>
         </div>
 
@@ -24,7 +25,7 @@ const ProductPage = ({ product,variants }) => {
           <h1 className="m-0">{product.title}</h1>
           <h6 className="m-0">Выберите модель</h6>
           <div className="d-inline-flex flex-wrap gap-2">
-            {variants.map(render=><button type="button" className="btn btn-dark rounded-4">{render.color.name}{render.storage.capacity===0?"":` (${render.storage.capacity} ГБ)`}</button>)}
+            {variants.map((render,index)=><button key={index} type="button" className="btn btn-dark rounded-4">{render.color.name}{render.storage.capacity===0?"":` (${render.storage.capacity} ГБ)`}</button>)}
           </div>
           <h2 className="m-0">Цена: <span className="badge text-bg-dark rounded-4">Выберите модель</span></h2>
         </div>
