@@ -6,13 +6,13 @@ import ProductPageDesc from "@/component/ProductPageDesc";
 const Page = async ({ params }) => {
     const { id } = await params;
 
-    const req = await fetch(`https://api.4mobile.kz/api/content/item/products/${id}`, {
+    const req = await fetch(`https://api.4mobile.kz/api/content/item/products/${id}?v=13`, {
         method: "GET",
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d",
         },
         // Переиспользуем кеш при SSR
-        next: { revalidate: 60 }
+        // next: { revalidate: 60 }
     });
 
     const res = await req.json();
@@ -31,7 +31,8 @@ const Page = async ({ params }) => {
         }
     });
     const resVar = await reqVar.json();
-    console.log(resVar);
+    console.log("page")
+    console.log(res);
     return (
         <div className="d-flex flex-column gap-5">
             <ProductPage product={res} variants={resVar} />
@@ -41,7 +42,7 @@ const Page = async ({ params }) => {
                         <ProductPageDesc desc={res.description} />
                     </div>
                     <div className="col-lg-6 px-md-5">
-                        <VideoPlayerWrapper url="https://www.youtube.com/watch?v=08ZzCYdYCXs" />
+                        <VideoPlayerWrapper url={res.youtube} />
                     </div>
 
                 </div>

@@ -7,6 +7,11 @@ const getYoutubeVideoId = (url) => {
 };
 
 const VideoPlayer = ({ url }) => {
+  console.log("youtube");
+  console.log(url);
+  if(!url) {
+    return "";
+  }
   const videoId = getYoutubeVideoId(url);
   if (!videoId) return <p>❌ Неверная ссылка на видео</p>;
 
