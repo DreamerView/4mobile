@@ -7,8 +7,6 @@ const getYoutubeVideoId = (url) => {
 };
 
 const VideoPlayer = ({ url }) => {
-  console.log("youtube");
-  console.log(url);
   if(!url) {
     return "";
   }

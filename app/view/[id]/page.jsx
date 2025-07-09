@@ -31,8 +31,6 @@ const Page = async ({ params }) => {
         }
     });
     const resVar = await reqVar.json();
-    console.log("page")
-    console.log(res);
     return (
         <div className="d-flex flex-column gap-5">
             <ProductPage product={res} variants={resVar} />
