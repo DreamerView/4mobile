@@ -1,4 +1,5 @@
 import Image from "next/image";
+import PlaceholderImg from "@/public/placeholder.png";
 
 const ProductPage = ({ product,variants }) => {
   return (
@@ -9,15 +10,14 @@ const ProductPage = ({ product,variants }) => {
             className="bg-body-secondary w-100 h-auto rounded-4"
             style={{ aspectRatio: 3 / 2, position: "relative" }}
           >
-            {product.image?.path &&
             <Image
-              src={`https://api.4mobile.kz/storage/uploads${product.image.path}`}
+              src={product.image?.path ? `https://api.4mobile.kz/storage/uploads${product.image.path}` : PlaceholderImg}
               alt={product.title}
               className="p-3"
               fill
               style={{ objectFit: "contain" }}
               loading="lazy"
-            />}
+            />
           </div>
         </div>
 

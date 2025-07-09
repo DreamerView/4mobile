@@ -12,7 +12,7 @@ const Page = async ({ params }) => {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d",
         },
         // Переиспользуем кеш при SSR
-        // next: { revalidate: 60 }
+        next: { revalidate: 60 }
     });
 
     const res = await req.json();
@@ -36,13 +36,8 @@ const Page = async ({ params }) => {
             <ProductPage product={res} variants={resVar} />
             <div className="container-xl">
                 <div className="row gap-lg-0 gap-5">
-                    <div className="col-lg-6 px-md-5 d-flex flex-column justify-content-center">
-                        <ProductPageDesc desc={res.description} />
-                    </div>
-                    <div className="col-lg-6 px-md-5">
-                        <VideoPlayerWrapper url={res.youtube} />
-                    </div>
-
+                    <ProductPageDesc desc={res.description} />
+                    <VideoPlayerWrapper url={res.youtube} />
                 </div>
             </div>
             <CardList list={list} title="Вам также может понравиться 💖"/>

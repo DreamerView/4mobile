@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./CardList.module.css";
 import Link from "next/link";
 import Image from "next/image"; // добавили импорт
+import PlaceholderImg from "@/public/placeholder.png";
 
 const CardList = ({ title = null, list = [] }) => {
     if (list.length === 0) return null;
@@ -88,17 +89,15 @@ const CardList = ({ title = null, list = [] }) => {
                         data-aos-delay={index * 200}
                     >
                         <div className={`${styles.cardBox} rounded-4`}>
-                            {item.image?.path && (
-                                <Image
-                                    src={`https://api.4mobile.kz/storage/uploads${item.image.path}`}
-                                    alt={item.title || "Image"}
-                                    width={220}
-                                    height={180}
-                                    style={{ width: "auto", height: 180 }}
-                                    loading="lazy"
-                                    unoptimized
-                                />
-                            )}
+                            <Image
+                                src={item.image?.path ? `https://api.4mobile.kz/storage/uploads${item.image.path}` : PlaceholderImg}
+                                alt={item.title || "Image"}
+                                width={220}
+                                height={180}
+                                style={{ width: "auto", height: 180 }}
+                                loading="lazy"
+                                unoptimized
+                            />
                         </div>
                         <h6 className="my-3 fw-bold text-break">{item.title}</h6>
                     </Link>
