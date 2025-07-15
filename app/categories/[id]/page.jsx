@@ -8,14 +8,16 @@ const Page = async({params}) => {
         method: 'GET',
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
-        }
+        },
+        next: { revalidate: 120 }
     });
     const list = await res.json();
     const currentCategory = await fetch(`https://api.4mobile.kz/api/content/item/categories/${id}`, {
         method: 'GET',
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
-        }
+        },
+        next: { revalidate: 120 }
     });
     const category = await currentCategory.json();
     return(
