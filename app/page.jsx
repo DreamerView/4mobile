@@ -7,7 +7,8 @@ const Home = async () => {
   method: "GET",
   headers: {
     "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
-  }
+  },
+  next: { revalidate: 120 }
 });
 
 const allProducts = await req.json();
