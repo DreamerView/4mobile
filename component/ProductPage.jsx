@@ -22,8 +22,8 @@ const ProductPage = ({ product,variants }) => {
       <div className="row">
         <div className="col-lg-5 col-md-6 px-lg-5" data-aos="fade-left">
           <div
-            className="bg-body-secondary w-100 h-auto rounded-4"
-            style={{ aspectRatio: 3 / 2, position: "relative" }}
+            className="w-100 h-auto rounded-4"
+            style={{ aspectRatio: 3 / 2, position: "relative", backgroundColor:"#cccccc"}}
           >
             <Image
               src={product.image?.path ? `https://api.4mobile.kz/storage/uploads${product.image.path}` : PlaceholderImg}
