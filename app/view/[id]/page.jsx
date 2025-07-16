@@ -17,18 +17,17 @@ const Page = async ({ params }) => {
 
     const res = await req.json();
 
-    console.log(res);
-
-    const reqList = await fetch(`https://api.4mobile.kz/api/content/items/products?filter[category]=${res.category['_id']}`, {
+    const reqList = await fetch(`https://api.4mobile.kz/api/content/items/products?filter[category]=${res.category['_id']}&&fields={"title":1,"image":1}`, {
         method: 'GET',
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
         },
         next: { revalidate: 120 }
     });
-    const list = await reqList.json();
+    const listRes = await reqList.json();
+    const list = listRes.filter(l=>l["_id"]!==id);
 
-    const reqBrand = await fetch(`https://api.4mobile.kz/api/content/items/products?filter[brand]=${res.brand['_id']}`, {
+    const reqBrand = await fetch(`https://api.4mobile.kz/api/content/items/products?filter[brand]=${res.brand['_id']}&&fields={"title":1,"image":1,"category":1}&&populate=1`, {
         method: 'GET',
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
@@ -37,8 +36,30 @@ const Page = async ({ params }) => {
     });
     const listBrand = await reqBrand.json();
 
-    console.log(listBrand)
+    const filterBrand = listBrand.filter(l=>l.category['_id']!==res.category['_id']);
 
+    const brandCategoryExist = [];
+    const brandCategoryArray = [];
+
+    filterBrand.forEach(f => {
+        const categoryId = f.category['_id'];
+        console.log(categoryId);
+
+        if (brandCategoryExist.includes(categoryId)) {
+            // Категория уже существует — добавляем товар в соответствующую группу
+            const group = brandCategoryArray.find(l => l.category['_id'] === categoryId);
+            if (group) {
+                group.products.push(f);
+            }
+        } else {
+            // Новая категория — создаём новую группу
+            brandCategoryExist.push(categoryId);
+            brandCategoryArray.push({
+                category: f.category,
+                products: [f]
+            });
+        }
+    });
 
     const reqVar = await fetch(`https://api.4mobile.kz/api/content/items/variants?filter[product]=${id}&&populate=1`, {
         method: 'GET',
@@ -49,16 +70,16 @@ const Page = async ({ params }) => {
     });
     const resVar = await reqVar.json();
     return (
-        <div className="d-flex flex-column gap-5">
+        <div className="d-flex flex-column gap-4">
             <ProductPage product={res} variants={resVar} />
             <div className="container-xl">
-                <div className="row gap-lg-0 gap-5">
+                <div className="row gap-lg-0 gap-4">
                     <ProductPageDesc desc={res.description} />
                     <VideoPlayerWrapper url={res.youtube} />
                 </div>
             </div>
             {list.length!==0 && <CardList list={list} title="Вам также может понравиться 💖"/>}
-            {listBrand.length!==0 && <CardList list={listBrand} title={`Также от ${res.brand.name} 💖`}/>}
+            {brandCategoryArray.map((render,index)=>render.products.length!==0 && (<CardList key={index} list={render.products} title={`Также от ${res.brand.name} (${render.category.name}) 💖`}/>))}
         </div>
     );
 };

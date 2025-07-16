@@ -3,7 +3,7 @@ import SocialNetwork from "@/component/SocialNetwork";
 import Map from "@/component/Map"
 
 const Home = async () => {
-  const req = await fetch("https://api.4mobile.kz/api/content/items/products?populate=1", {
+  const req = await fetch(`https://api.4mobile.kz/api/content/items/products?populate=1&&fields={"title":1,"image":1,"category":1}`, {
     method: "GET",
     headers: {
       "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
@@ -12,6 +12,8 @@ const Home = async () => {
   });
 
   const allProducts = await req.json();
+
+  console.log(allProducts);
 
   // Группировка вручную через массив
   const groupedArray = [];
@@ -41,7 +43,7 @@ const Home = async () => {
 
   return (
     <>
-      <div className="d-flex flex-column gap-5">
+      <div className="d-flex flex-column gap-0">
         {groupedArray.map((product, index) => (<CardList key={index} title={product.title} list={product.json} />))}
         <SocialNetwork />
         <Map />
