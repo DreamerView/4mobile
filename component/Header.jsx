@@ -1,6 +1,7 @@
 import Image from "next/image";
 import LogoImg from "@/public/logo.png";
 import Link from "next/link";
+import styles from "./Header.module.css"
 
 const Header = () => {
     
@@ -20,7 +21,7 @@ const Header = () => {
                                 src={LogoImg}
                                 width={275}
                                 height={98}
-                                className="img-fluid"
+                                className={`img-fluid ${styles['logo-img']}`}
                                 alt="Логотип"
                                 priority
                             />

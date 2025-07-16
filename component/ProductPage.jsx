@@ -1,7 +1,11 @@
+"use client"
 import Image from "next/image";
 import PlaceholderImg from "@/public/placeholder.png";
+import { useState } from "react";
 
 const ProductPage = ({ product,variants }) => {
+  const [price,setPrice] = useState("Выберите модель");
+  const hasInStock = variants.some(v => v["in_stock"] === true);
   return (
     <div className="container-xl pt-md-5">
       <div className="row">
@@ -24,10 +28,35 @@ const ProductPage = ({ product,variants }) => {
         <div className="col-lg-7 my-5 mt-md-0 col-md-6 px-lg-5 d-flex flex-column justify-content-center gap-4" data-aos="fade-right" data-aos-delay="200">
           <h1 className="m-0">{product.title}</h1>
           <h6 className="m-0">Выберите модель</h6>
-          <div className="d-inline-flex flex-wrap gap-2">
-            {variants.map((render,index)=><button key={index} type="button" className="btn btn-dark rounded-4">{render.color.name}{render.storage.capacity===0?"":` (${render.storage.capacity} ГБ)`}</button>)}
-          </div>
-          <h2 className="m-0">Цена: <span className="badge text-bg-dark rounded-4">Выберите модель</span></h2>
+          {variants.length!==0?
+          
+            <>
+              <div className="d-inline-flex flex-wrap gap-2">
+                {variants.filter(f => f["in_stock"] === true).map((render, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setPrice(render.price)}
+                    type="button"
+                    className="btn btn-light rounded-4"
+                  >
+                    {render.color.name}
+                    {render.storage.capacity === 0 ? "" : ` (${render.storage.capacity} ГБ)`}
+                  </button>
+                ))}
+              </div>
+
+              {hasInStock ? (
+                <h2 className="m-0">
+                  Цена:{" "}
+                  <span className="badge text-bg-dark rounded-4">
+                    {!price || price === 0 ? "Договорная" : price}
+                  </span>
+                </h2>
+              ):<h2 className="m-0 text-danger">Нету в наличии</h2>}
+            </>
+          :
+              <h2 className="m-0 text-danger">Нету в наличии</h2>
+          }
         </div>
       </div>
     </div>

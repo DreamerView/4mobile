@@ -60,7 +60,7 @@ const Page = async ({ params }) => {
         }
     });
 
-    const reqVar = await fetch(`https://api.4mobile.kz/api/content/items/variants?filter[product]=${id}&&populate=1`, {
+    const reqVar = await fetch(`https://api.4mobile.kz/api/content/items/variants?filter[product]=${id}&&populate=1&&fields={"color":1,"storage":1,"price":1,"in_stock":1}`, {
         method: 'GET',
         headers: {
             "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d"
