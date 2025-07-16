@@ -3,6 +3,72 @@ import ProductPage from "@/component/ProductPage";
 import VideoPlayerWrapper from "@/component/VideoPlayerWrapper";
 import ProductPageDesc from "@/component/ProductPageDesc";
 
+export async function generateMetadata({ params }) {
+    const {id} = await params;
+    const req = await fetch(`https://api.4mobile.kz/api/content/item/products/${id}`, {
+        method: "GET",
+        headers: {
+            "api-key": "USR-22f5347f0fba81f53ecba0abf04ef430bf7bd40d",
+        },
+        next: { revalidate: 120 }
+    });
+
+    const res = await req.json();
+
+    const baseUrl = 'https://4mobile.kz';
+    const apiBaseUrl = 'https://api.4mobile.kz';
+    const canonicalUrl = `${baseUrl}/view/${id}`;
+
+    const title = res.title
+        ? `${res.title} — Купить в 4mobile`
+        : 'Аксессуары и товары для вашего телефона — 4mobile';
+
+    let description = res.description || 'Аксессуары, гаджеты и товары для вашего смартфона в интернет-магазине 4mobile.';
+
+    if (description.length > 140) {
+        description = description.slice(0, 140) + '... Читать подробнее.';
+    }
+
+    // Формируем URL изображения, если оно есть
+    const imageUrl = res.image?.path
+        ? `${apiBaseUrl}/storage/uploads${res.image.path}`
+        : null;
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: canonicalUrl
+        },
+        openGraph: {
+            title,
+            description,
+            url: canonicalUrl,
+            siteName: '4mobile',
+            type: 'website',
+            ...(imageUrl && {
+                images: [
+                    {
+                        url: imageUrl,
+                        width: 1200,
+                        height: 630,
+                        alt: res.title || '4mobile'
+                    }
+                ]
+            })
+        },
+        twitter: {
+            card: imageUrl ? 'summary_large_image' : 'summary',
+            title,
+            description,
+            ...(imageUrl && { images: [imageUrl] })
+        }
+    };
+}
+
+
+
+
 const Page = async ({ params }) => {
     const { id } = await params;
 
