@@ -43,7 +43,6 @@ const Page = async ({ params }) => {
 
     filterBrand.forEach(f => {
         const categoryId = f.category['_id'];
-        console.log(categoryId);
 
         if (brandCategoryExist.includes(categoryId)) {
             // Категория уже существует — добавляем товар в соответствующую группу
@@ -70,7 +69,7 @@ const Page = async ({ params }) => {
     });
     const resVar = await reqVar.json();
     return (
-        <div className="d-flex flex-column gap-4">
+        <div className="d-flex flex-column gap-5">
             <ProductPage product={res} variants={resVar} />
             <div className="container-xl">
                 <div className="row gap-lg-0 gap-4">
@@ -78,8 +77,10 @@ const Page = async ({ params }) => {
                     <VideoPlayerWrapper url={res.youtube} />
                 </div>
             </div>
-            {list.length!==0 && <CardList list={list} title="Вам также может понравиться 💖"/>}
-            {brandCategoryArray.map((render,index)=>render.products.length!==0 && (<CardList key={index} list={render.products} title={`Также от ${res.brand.name} (${render.category.name}) 💖`}/>))}
+            <div className="d-flex flex-column gap-0">
+                {list.length!==0 && <CardList list={list} title="Вам также может понравиться 💖"/>}
+                {brandCategoryArray.map((render,index)=>render.products.length!==0 && (<CardList key={index} list={render.products} title={`Также от ${res.brand.name} (${render.category.name}) 💖`}/>))}
+            </div>
         </div>
     );
 };

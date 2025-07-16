@@ -13,8 +13,6 @@ const Home = async () => {
 
   const allProducts = await req.json();
 
-  console.log(allProducts);
-
   // Группировка вручную через массив
   const groupedArray = [];
 
