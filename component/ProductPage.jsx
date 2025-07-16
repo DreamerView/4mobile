@@ -4,8 +4,19 @@ import PlaceholderImg from "@/public/placeholder.png";
 import { useState } from "react";
 
 const ProductPage = ({ product,variants }) => {
+  console.log(variants);
+  const [loading,setLoading] = useState(false);
   const [price,setPrice] = useState("Выберите модель");
+  const [selected,setSelected] = useState("");
   const hasInStock = variants.some(v => v["in_stock"] === true);
+  const handleSelection = (price,id) => {
+    setLoading(true);
+    setPrice(price);
+    setSelected(id);
+    setTimeout(()=>{
+      setLoading(false);
+    },200)
+  };
   return (
     <div className="container-xl pt-md-5">
       <div className="row">
@@ -35,12 +46,12 @@ const ProductPage = ({ product,variants }) => {
                 {variants.filter(f => f["in_stock"] === true).map((render, index) => (
                   <button
                     key={index}
-                    onClick={() => setPrice(render.price)}
+                    onClick={() => handleSelection(render.price, render["_id"])}
                     type="button"
-                    className="btn btn-light rounded-4"
+                    className={`btn ${selected===render["_id"]?"btn-light":"btn-dark"} rounded-4`}
                   >
                     {render.color.name}
-                    {render.storage.capacity === 0 ? "" : ` (${render.storage.capacity} ГБ)`}
+                    {render.storage.capacity === 0 ? "" : `${render.storage.capacity !==0 && ` (${render.storage.capacity} ГБ)`}`}
                   </button>
                 ))}
               </div>
@@ -49,7 +60,13 @@ const ProductPage = ({ product,variants }) => {
                 <h2 className="m-0">
                   Цена:{" "}
                   <span className="badge text-bg-dark rounded-4">
-                    {!price || price === 0 ? "Договорная" : price}
+                    {loading 
+                    ? 
+                      <div className="spinner-border text-danger mx-5" role="status" style={{width:"1.5rem",height:"1.5rem"}}>
+                        <span className="visually-hidden">Loading...</span>
+                      </div> 
+                    : 
+                      !price || price === 0 ? "Договорная" : Number.isInteger(price) ? new Intl.NumberFormat('ru-RU').format(price) + " ₸" : price}
                   </span>
                 </h2>
               ):<h2 className="m-0 text-danger">Нету в наличии</h2>}

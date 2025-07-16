@@ -44,7 +44,7 @@ const Header = () => {
                         src={LogoImg}
                         width={160} // можно адаптировать под твой размер
                         height={40}
-                        className="img-fluid"
+                        className={`img-fluid ${styles['logo-img']}`}
                         alt="Логотип"
                         priority
                         />

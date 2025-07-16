@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 const ProductPageDesc = ({desc}) => {
     const MAX_LENGTH = 225;
@@ -22,7 +23,7 @@ const ProductPageDesc = ({desc}) => {
         <div className="col-lg-6 px-md-5 d-flex flex-column justify-content-center">
             <div className="bg-dark p-4 rounded-4 text-light">
                 <p className="mb-3 text-muted">Описание</p>
-                <p style={{ whiteSpace: "pre-line" }}>{renderDescription(visibleText)}</p>
+                <p style={{ whiteSpace: "pre-line" }}>{<ReactMarkdown>{visibleText}</ReactMarkdown>}</p>
                 {isLong && (
                     <button
                         className="btn btn-sm btn-outline-secondary border-0 rounded-4 mt-1 px-3"
